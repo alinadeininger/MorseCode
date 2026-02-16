@@ -17,15 +17,11 @@ public class Main {
                 System.out.println();
                 String textInput = scanner.nextLine();
                 System.out.println(m.textToMorse(textInput));
-
-
-
             } else if (choice == 2) {
                 System.out.println("Insert morse code that you want to convert to text: ");
                 System.out.println();
                 String morseInput = scanner.nextLine();
                 System.out.println(m.morseToText(morseInput));
-
             } else {
                 System.out.println("Not a valid choice!");
             }

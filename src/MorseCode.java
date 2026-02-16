@@ -1,16 +1,14 @@
 import java.util.HashMap;
 
 public class MorseCode {
-
-    private final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private final String[] morseCode = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
-            "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
-            "..-", "...-", ".--", "-..-", "-.--", "--.."};
-
     private final HashMap<String, String> letterToMorse = new HashMap<>();
     private final HashMap<String, String> morseToLetter = new HashMap<>();
 
     public MorseCode() {
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String[] morseCode = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
+                "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
+                "..-", "...-", ".--", "-..-", "-.--", "--.."};
 
         for (int i = 0; i < morseCode.length; i++) {
             letterToMorse.put(String.valueOf(alphabet.charAt(i)), morseCode[i]);
@@ -18,14 +16,13 @@ public class MorseCode {
         }
     }
 
-    public String getLetter(String morse) {
+    private String getLetter(String morse) {
         return morseToLetter.get(morse);
     }
 
-    public String getMorse(String letter) {
+    private String getMorse(String letter) {
         return letterToMorse.get(letter);
     }
-
 
     public String textToMorse(String textInput) {
         textInput = textInput.toUpperCase();
@@ -44,7 +41,6 @@ public class MorseCode {
             result += morse + " ";
         }
 
-
         return result.trim();
     }
 
@@ -55,11 +51,11 @@ public class MorseCode {
         for (String morse : morseParts) {
             String letter = getLetter(morse);
             if (letter == null) {
-                throw new IllegalArgumentException("Invalid symbol:" + morse + ". Please enter valid morse code.");
+                throw new IllegalArgumentException("Invalid symbol: " + morse + ". Please enter valid morse code.");
             }
             result += letter;
-
         }
+
         return result;
     }
 

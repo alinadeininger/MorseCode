@@ -1,25 +1,22 @@
-
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TestMorse {
-
     MorseCode m = new MorseCode();
 
     @Test
     void singleLetterToMorse() {
-        assertEquals("...", m.getMorse("S"));
-        assertEquals("--.", m.getMorse("G"));
-        assertEquals("-.--", m.getMorse("Y"));
+        assertEquals("...", m.textToMorse("S"));
+        assertEquals("--.", m.textToMorse("G"));
+        assertEquals("-.--", m.textToMorse("Y"));
     }
 
     @Test
     void singleMorseToLetter() {
-        assertEquals("P", m.getLetter(".--."));
-        assertEquals("J", m.getLetter(".---"));
-        assertEquals("A", m.getLetter(".-"));
+        assertEquals("P", m.morseToText(".--."));
+        assertEquals("J", m.morseToText(".---"));
+        assertEquals("A", m.morseToText(".-"));
     }
 
     @Test
@@ -41,16 +38,13 @@ public class TestMorse {
     }
 
     @Test
-    void roundTrip(){
+    void roundTrip() {
         String original = "ROUNDTRIP";
         String morse = m.textToMorse(original);
         String result = m.morseToText(morse);
 
         assertEquals(original, result);
     }
-
-
-
 
     @Test
     void longerMorseToText() {
@@ -64,21 +58,16 @@ public class TestMorse {
                 ".- -. -.. ... ..- -. -. -.-- - --- -.. .- -.--", m.textToMorse(myText));
     }
 
-
     @Test
-    void invalidLetterInput(){
-        assertNull(m.getMorse("3"));
-        assertNull(m.getMorse("Å"));
-
+    void invalidTextInput() {
         assertThrows(IllegalArgumentException.class, () -> m.textToMorse("good&"));
+        assertThrows(IllegalArgumentException.class, () -> m.textToMorse("345Å"));
     }
 
     @Test
-    void invalidMorseInput(){
-        assertNull(m.getLetter("%"));
-        assertNull(m.getLetter("999999"));
-
+    void invalidMorseInput() {
         assertThrows(IllegalArgumentException.class, () -> m.morseToText("... ="));
+        assertThrows(IllegalArgumentException.class, () -> m.morseToText("#"));
     }
 
 }
