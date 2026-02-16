@@ -7,7 +7,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            System.out.print("Do you want to convert letters to morse code (1) OR morse code to letters (2)?: ");
+            System.out.print("Do you want to convert letters --> morse code (1) OR morse code --> letters (2)?: ");
             int choice = Integer.parseInt(scanner.nextLine());
 
             System.out.println("*********************************************************************************");
@@ -15,33 +15,15 @@ public class Main {
             if (choice == 1) {
                 System.out.println("Insert text that you want to convert to morse code: ");
                 System.out.println();
-                String textInput = scanner.nextLine().toUpperCase();
-
-
-                for (int i = 0; i < textInput.length(); i++) {
-                    String letter = m.getMorse(String.valueOf(textInput.charAt(i)));
-                    if (letter.equals(" ")) {
-                        continue;
-                    }
-                    System.out.print(letter + " ");
-                }
+                String textInput = scanner.nextLine();
+                System.out.println(m.textToMorse(textInput));
 
 
             } else if (choice == 2) {
                 System.out.println("Insert morse code that you want to convert to text: ");
                 System.out.println();
                 String morseInput = scanner.nextLine();
-
-                String[] morseParts = morseInput.split(" ");
-
-                for (int i = 0; i < morseParts.length; i++) {
-                    String morse = m.getLetter(morseParts[i]);
-                    if (morse == null) {
-                        System.out.println("Invalid symbol!");
-                        continue;
-                    }
-                    System.out.print(morse);
-                }
+                System.out.println(m.morseToText(morseInput));
 
             } else {
                 System.out.println("Not a valid choice!");

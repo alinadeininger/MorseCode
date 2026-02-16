@@ -2,41 +2,20 @@ import java.util.HashMap;
 
 public class MorseCode {
 
-    HashMap<String, String> letterToMorse = new HashMap<>();
-    HashMap<String, String> morseToLetter = new HashMap<>();
+    private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXZY";
+    private String[] morseCode = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
+            "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
+            "..-", "...-", ".--", "-..-", "-.--", "--.."};
 
-    public MorseCode(){
-        addPair("A", ".-");
-        addPair("B", "-...");
-        addPair("C", "-.-.");
-        addPair("D", "-..");
-        addPair("E", ".");
-        addPair("F", "..-.");
-        addPair("G", "--.");
-        addPair("H", "....");
-        addPair("I", "..");
-        addPair("J", ".---");
-        addPair("K", "-.-");
-        addPair("L", ".-..");
-        addPair("M", "--");
-        addPair("N", "-.");
-        addPair("O", "---");
-        addPair("P", ".--.");
-        addPair("Q", "--.-");
-        addPair("R", ".-.");
-        addPair("S", "...");
-        addPair("T", "-");
-        addPair("U", "..-");
-        addPair("V", "...-");
-        addPair("W", ".--");
-        addPair("X", "-..-");
-        addPair("Y", "-.--");
-        addPair("Z", "--..");
-    }
+    private final HashMap<String, String> letterToMorse = new HashMap<>();
+    private final HashMap<String, String> morseToLetter = new HashMap<>();
 
-    private void addPair(String letter, String morse) {
-        letterToMorse.put(letter, morse);
-        morseToLetter.put(morse, letter);
+    public MorseCode() {
+
+        for (int i = 0; i < morseCode.length; i++) {
+            letterToMorse.put(String.valueOf(alphabet.charAt(i)), morseCode[i]);
+            morseToLetter.put(morseCode[i], String.valueOf(alphabet.charAt(i)));
+        }
     }
 
     public String getLetter(String morse) {
@@ -47,5 +26,41 @@ public class MorseCode {
         return letterToMorse.get(letter);
     }
 
+
+    public String textToMorse(String textInput) {
+        textInput = textInput.toUpperCase();
+        String result = "";
+        for (int i = 0; i < textInput.length(); i++) {
+            String letter = String.valueOf(textInput.charAt(i));
+            if (letter.equals(" ")) {
+                continue;
+            }
+            String morse = getMorse(letter);
+
+            if (morse == null) {
+                System.out.println("Invalid input: " + letter);
+                System.out.println("Only letters A to Z");
+                continue;
+            }
+            result += morse + " ";
+        }
+        return result.trim();
+    }
+
+    public String morseToText(String morseInput) {
+        String result = "";
+        String[] morseParts = morseInput.split(" ");
+
+        for (String morse : morseParts) {
+            String letter = getLetter(morse);
+            if (letter == null) {
+                System.out.println("Invalid symbol: " + morse);
+                continue;
+            }
+            result += letter;
+
+        }
+        return result;
+    }
 
 }
