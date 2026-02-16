@@ -2,8 +2,8 @@ import java.util.HashMap;
 
 public class MorseCode {
 
-    private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private String[] morseCode = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
+    private final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final String[] morseCode = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
             "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
             "..-", "...-", ".--", "-..-", "-.--", "--.."};
 
@@ -50,7 +50,7 @@ public class MorseCode {
 
     public String morseToText(String morseInput) {
         String result = "";
-        String[] morseParts = morseInput.split(" ");
+        String[] morseParts = morseInput.trim().split("\\s+");
 
         for (String morse : morseParts) {
             String letter = getLetter(morse);
@@ -62,6 +62,5 @@ public class MorseCode {
         }
         return result;
     }
-
 
 }
