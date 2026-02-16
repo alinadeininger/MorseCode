@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class MorseCode {
 
-    private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXZY";
+    private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private String[] morseCode = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
             "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
             "..-", "...-", ".--", "-..-", "-.--", "--.."};
@@ -30,6 +30,7 @@ public class MorseCode {
     public String textToMorse(String textInput) {
         textInput = textInput.toUpperCase();
         String result = "";
+
         for (int i = 0; i < textInput.length(); i++) {
             String letter = String.valueOf(textInput.charAt(i));
             if (letter.equals(" ")) {
@@ -38,12 +39,12 @@ public class MorseCode {
             String morse = getMorse(letter);
 
             if (morse == null) {
-                System.out.println("Invalid input: " + letter);
-                System.out.println("Only letters A to Z");
-                continue;
+                throw new IllegalArgumentException("Invalid input: " + letter + ". Please only enter letters A to Z.");
             }
             result += morse + " ";
         }
+
+
         return result.trim();
     }
 
@@ -54,13 +55,13 @@ public class MorseCode {
         for (String morse : morseParts) {
             String letter = getLetter(morse);
             if (letter == null) {
-                System.out.println("Invalid symbol: " + morse);
-                continue;
+                throw new IllegalArgumentException("Invalid symbol:" + morse + ". Please enter valid morse code.");
             }
             result += letter;
 
         }
         return result;
     }
+
 
 }

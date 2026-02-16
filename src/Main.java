@@ -19,6 +19,7 @@ public class Main {
                 System.out.println(m.textToMorse(textInput));
 
 
+
             } else if (choice == 2) {
                 System.out.println("Insert morse code that you want to convert to text: ");
                 System.out.println();
@@ -31,8 +32,8 @@ public class Main {
 
         } catch (NumberFormatException e) {
             System.out.println("You have to put a number (1 or 2).");
-        } catch (NullPointerException e) {
-            System.out.println("Invalid symbol!");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
